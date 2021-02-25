@@ -20,7 +20,7 @@ do
                 do
                     for ce in "${CEPOCHS[@]}"
                     do
-                        python automated_curricula.py --curric_type=t --numbatches=nb --cumulative=c --forward=f --epochs=e --curriculum_epochs=ce --plot=False
+                        python3 automated_curricula.py --curric_type="${t}" --numbatches="${nb}" --cumulative="${c}" --forward="${f}" --epochs="${e}" --curriculum_epochs="${ce}" --plot=False
                     done
                 done
             done
