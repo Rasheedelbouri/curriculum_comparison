@@ -17,6 +17,7 @@ from keras.losses import categorical_crossentropy
 from scipy.stats import entropy
 import argparse
 from utils.boolParse import str2bool
+import os
 
 
 def flattenList(t):
@@ -169,7 +170,9 @@ if __name__ == "__main__":
     epochs = args.epochs
     curriculum_epochs = args.curriculum_epochs
     plot = args.plot
-    
+
+    save_path="../Results/digits/"+ str(curric_type) 
+
     data = loadData()
     bn = buildNetwork()
     model = bn.build(data[0],data[-1])
@@ -198,3 +201,13 @@ if __name__ == "__main__":
             plt.ylabel("Loss")
             plt.legend(["train", 'val'])
             plt.show()
+    
+    if not os.path.exists(os.path.join(save_path, str(numbatches)+"curricBatches")):
+        os.mkdir(os.path.join(save_path, str(numbatches)+"curricBatches"))
+
+    with  open(os.path.join(save_path, 
+               "epochs"+str(epochs)+
+               "cumulative"+str(cumulative)+
+               "curricEpochs"+str(curriculum_epochs)+".txt"), "w") as output:
+        output.write(str(val_accs))
+    output.close()
